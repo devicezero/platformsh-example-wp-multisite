@@ -97,6 +97,7 @@ else {
     include(dirname(__FILE__, 2) . '/wp-config-local.php');
   }
 }
+define('WP_ALLOW_MULTISITE', true);
 
 // Do not put a slash "/" at the end.
 // https://codex.wordpress.org/Editing_wp-config.php#WP_HOME
