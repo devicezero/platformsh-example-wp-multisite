@@ -29,6 +29,8 @@ if (isset($_SERVER['HTTP_HOST'])) {
   $site_scheme = !empty($_SERVER['HTTPS']) ? 'https' : 'http';
 }
 
+echo $site_host;
+
 if ($config->hasRelationship('database')) {
   // This is where we get the relationships of our application dynamically
   // from Platform.sh.
