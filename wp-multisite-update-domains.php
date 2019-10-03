@@ -20,11 +20,15 @@ try {
 
 	$primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
 
+	# get database credentials and connect
 	$credentials = $config->credentials('database');
 	$mysqli = new mysqli($credentials['host'], $credentials['username'], $credentials['password'], $credentials['path']);
+
+	# get the current list of wp sites/blogs
 	$blogsQuery = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
 	$blogs = $blogsQuery->fetch_all();
 
+	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
 		if($blog[0] === 1) {
 			$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
