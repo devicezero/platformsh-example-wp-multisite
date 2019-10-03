@@ -13,7 +13,7 @@ if (!$config->isValidPlatform()) {
 }
 
 array_filter($config->routes(), function($k) {
-	print_r($k);
+	print_r($k['primary'] == true);
 	// return ($k.primary == true);
 });
 
