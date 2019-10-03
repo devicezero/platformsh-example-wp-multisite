@@ -12,8 +12,6 @@ if (!$config->isValidPlatform()) {
     die("Not in a Platform.sh Environment.");
 }
 
-$credentials = $config->credentials('database');
-
 # get primary domain
 $primaryRouteArray = array_filter($config->routes(), function($k) {
 	return $k['primary'] == true;
@@ -21,14 +19,9 @@ $primaryRouteArray = array_filter($config->routes(), function($k) {
 
 $primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
 
-$dsn = sprintf('mysql:host=%s;port=%d;dbname=%s', $credentials['host'], $credentials['port'], $credentials['path']);
-$connection = new \PDO($dsn, $credentials['username'], $credentials['password'], [
-		\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-		\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => TRUE,
-		\PDO::MYSQL_ATTR_FOUND_ROWS => TRUE,
-]);
-
-
-$blogsQuery = "SELECT blog_id, domain FROM wp_blogs";
-$blogs = $connection->query($blogsQuery);
+$credentials = $config->credentials('database');
+$mysqli = new mysqli($credentials['host'], $credentials['username'], $credentials['password'], $credentials['path']);
+$blogs = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
 print_r($blogs);
+
+// "UPDATE wp_blogs SET domain = '{$blogDomain}' WHERE blog_id = {$blogId};
