@@ -31,4 +31,4 @@ $connection = new \PDO($dsn, $credentials['username'], $credentials['password'],
 
 $blogsQuery = "SELECT blog_id, domain FROM wp_blogs";
 $blogs = $connection->query($blogsQuery);
-print_f($blogs);
+print_r($blogs);
