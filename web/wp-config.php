@@ -16,7 +16,7 @@ $primaryRouteArray = array_filter($config->routes(), function($k) {
 	return $k['primary'] == true;
 });
 
-$primaryRoute = parse_url(key($primaryRouteArray), PHP_URL_HOST);
+$primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
 
 // Set default scheme and hostname.
 $site_scheme = 'http';
@@ -107,7 +107,7 @@ else {
 define('WP_ALLOW_MULTISITE', true);
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', true);
-define('DOMAIN_CURRENT_SITE', $primaryRoute);
+define('DOMAIN_CURRENT_SITE', $primaryDomain);
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
