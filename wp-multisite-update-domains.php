@@ -12,20 +12,22 @@ if (!$config->isValidPlatform()) {
     die("Not in a Platform.sh Environment.");
 }
 
-# get primary domain
-$primaryRouteArray = array_filter($config->routes(), function($k) {
-	return $k['primary'] == true;
-});
+try {
+	# get primary domain
+	$primaryRouteArray = array_filter($config->routes(), function($k) {
+		return $k['primary'] == true;
+	});
 
-$primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
+	$primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
 
-$credentials = $config->credentials('database');
-$mysqli = new mysqli($credentials['host'], $credentials['username'], $credentials['password'], $credentials['path']);
-$blogsQuery = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
-$blogs = $blogsQuery->fetch_all();
-print_r($blogs);
+	$credentials = $config->credentials('database');
+	$mysqli = new mysqli($credentials['host'], $credentials['username'], $credentials['password'], $credentials['path']);
+	$blogsQuery = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
+	$blogs = $blogsQuery->fetch_all();
 
-// "UPDATE wp_blogs SET domain = '{$blogDomain}' WHERE blog_id = {$blogId};
-foreach ($blogs as $blog) {
-	echo "UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}";
+	foreach ($blogs as $blog) {
+		$mysqli->query("UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+	}
+} catch (\Exception $e) {
+	print $e->getMessage();
 }
