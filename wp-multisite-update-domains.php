@@ -27,7 +27,9 @@ try {
 
 	foreach ($blogs as $blog) {
 		$mysqli->query("UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+		echo $blog[1] . 'updated\n';
 	}
+	echo 'All subdomains updated\n';
 } catch (\Exception $e) {
 	print $e->getMessage();
 }
