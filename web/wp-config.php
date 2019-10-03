@@ -17,7 +17,6 @@ $primaryRouteArray = array_filter($config->routes(), function($k) {
 });
 
 $primaryRoute = parse_url(key($primaryRouteArray), PHP_URL_HOST);
-echo $primaryRoute;
 
 // Set default scheme and hostname.
 $site_scheme = 'http';
