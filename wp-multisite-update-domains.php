@@ -26,10 +26,12 @@ try {
 	$blogs = $blogsQuery->fetch_all();
 
 	foreach ($blogs as $blog) {
-		$mysqli->query("UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-		echo $blog[1] . 'updated\n';
+		if($blog[0] === 1) {
+			$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+		} else {
+			$mysqli->query("UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+		}
 	}
-	echo 'All subdomains updated\n';
 } catch (\Exception $e) {
 	print $e->getMessage();
 }
