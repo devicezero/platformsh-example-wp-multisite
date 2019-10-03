@@ -22,7 +22,7 @@ $primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
 $credentials = $config->credentials('database');
 $mysqli = new mysqli($credentials['host'], $credentials['username'], $credentials['password'], $credentials['path']);
 $blogsQuery = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
-$blogs = $blogsQuery->fetch_assoc();
+$blogs = $blogsQuery->fetch_all();
 print_r($blogs);
 
 // "UPDATE wp_blogs SET domain = '{$blogDomain}' WHERE blog_id = {$blogId};
