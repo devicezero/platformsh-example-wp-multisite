@@ -12,7 +12,7 @@ if (!$config->isValidPlatform()) {
     die("Not in a Platform.sh Environment.");
 }
 
-print_r($config->getRoute());
+print_r($config->routes());
 
 // Set default scheme and hostname.
 $site_scheme = 'http';
