@@ -8,9 +8,9 @@ require __DIR__.'/vendor/autoload.php';
 // You can alternatively use getenv() yourself.
 $config = new Config();
 
-// if (!$config->isValidPlatform()) {
-//     die("Not in a Platform.sh Environment.");
-// }
+if (!$config->isValidPlatform()) {
+    die("Not in a Platform.sh Environment.");
+}
 
 # get primary domain
 $primaryRouteArray = array_filter($config->routes(), function($k) {
@@ -27,5 +27,5 @@ print_r($blogs);
 
 // "UPDATE wp_blogs SET domain = '{$blogDomain}' WHERE blog_id = {$blogId};
 foreach ($blogs as $blog) {
-	echo "UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]};
+	echo "UPDATE wp_blogs SET domain = '{$blog[1]}.{$primaryDomain}' WHERE blog_id = {$blog[0]}";
 }
