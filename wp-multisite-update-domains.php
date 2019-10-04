@@ -32,17 +32,16 @@ try {
 	$originalDomain = $site['domain'];
 
 	# differnt logic depends if custom domain is set
-	if (strpos($originalDomain, 'platform.sh') !== false) {
-		echo "platform.sh site";
+	if (strpos($originalDomain, 'platformsh.site') !== false) {
 		# base domain is a platform.sh domain
-			// foreach ($blogs as $blog) {
-			// 	if($blog[0] === 1) {
-			// 		$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			// 	} else {
-			// 		$subDomain = explode('.', $blog[1])[0];
-			// 		$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			// 	}
-			// }
+			foreach ($blogs as $blog) {
+				if($blog[0] == 1) {
+					$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+				} else {
+					$subDomain = explode('.', $blog[1])[0];
+					$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+				}
+			}
 	} else {
 		# custom domain
 		# update all domains based on the primary/base domain we have on the current environment
