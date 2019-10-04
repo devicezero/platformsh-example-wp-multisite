@@ -29,15 +29,21 @@ try {
 	$blogsQuery = $mysqli->query("SELECT blog_id, domain FROM wp_blogs");
 	$blogs = $blogsQuery->fetch_all();
 
+	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
+	$site = $blogsQuery->fetch_all();
+	$originalDomain = $site[0];
+
 	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
 		if($blog[0] === 1) {
 			// $mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			print_r($primaryDomain);
+			print_r($originalDomain.$primaryDomain);
+			echo "/n";
 		} else {
 			$subDomain = explode('.', $blog[1])[0];
 			// $mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			print_r($subDomain.$primaryDomain);
+			print_r($subDomain.$originalDomain.$primaryDomain);
+			echo "/n";
 		}
 	}
 } catch (\Exception $e) {
