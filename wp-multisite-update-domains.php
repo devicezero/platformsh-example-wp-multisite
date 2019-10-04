@@ -35,7 +35,7 @@ try {
 			$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
 		} else {
 			$subDomain = explode('.', $blog[1])[0];
-			$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+			$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
 		}
 	}
 } catch (\Exception $e) {
