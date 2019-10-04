@@ -29,7 +29,7 @@ try {
 	$blogs = $blogsQuery->fetch_all();
 
 	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
-	$site = $blogsQuery->fetch_assoc();
+	$site = $siteQuery->fetch_assoc();
 	$originalDomain = $site['domain'];
 	echo $originalDomain;
 
