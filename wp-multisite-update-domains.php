@@ -31,8 +31,6 @@ try {
 	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
 	$site = $siteQuery->fetch_assoc();
 	$originalDomain = $site['domain'];
-	echo $originalDomain;
-
 
 	// # differnt logic depends if custom domain is set
 	// if (condition) {
@@ -45,13 +43,10 @@ try {
 	foreach ($blogs as $blog) {
 		if($blog[0] === 1) {
 			// $mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			print_r($originalDomain.$primaryDomain);
-			echo "/n";
+			print_r($primaryDomain);
 		} else {
 			$subDomain = explode('.', $blog[1])[0];
-			// $mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
-			print_r($subDomain.$originalDomain.$primaryDomain);
-			echo "/n";
+			$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
 		}
 	}
 } catch (\Exception $e) {
