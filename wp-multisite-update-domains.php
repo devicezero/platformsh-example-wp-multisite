@@ -19,6 +19,7 @@ try {
 	});
 
 	$primaryDomain = parse_url(key($primaryRouteArray), PHP_URL_HOST);
+	echo $primaryDomain;
 
 	# get database credentials and connect
 	$credentials = $config->credentials('database');
@@ -31,6 +32,7 @@ try {
 	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
 	$site = $siteQuery->fetch_assoc();
 	$originalDomain = $site['domain'];
+	echo $originalDomain;
 
 	// # differnt logic depends if custom domain is set
 	// if (condition) {
