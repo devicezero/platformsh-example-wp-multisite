@@ -32,10 +32,12 @@ try {
 	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
 		if($blog[0] === 1) {
-			$mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+			// $mysqli->query("UPDATE wp_blogs SET domain = '{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+			print_r($primaryDomain);
 		} else {
 			$subDomain = explode('.', $blog[1])[0];
-			$mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+			// $mysqli->query("UPDATE wp_blogs SET domain = '{$subDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
+			print_r($subDomain.$primaryDomain);
 		}
 	}
 } catch (\Exception $e) {
