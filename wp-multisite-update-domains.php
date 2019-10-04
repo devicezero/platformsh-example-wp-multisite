@@ -1,5 +1,6 @@
 <?php
 
+## WON'T WORK WITH SUBLEVEL ENVIRONMENT HIERACHY
 use Platformsh\ConfigReader\Config;
 
 require __DIR__.'/vendor/autoload.php';
