@@ -48,7 +48,7 @@ try {
 
 	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
-		if($blog[0] === 1) {
+		if($blog[0] == 1) {
 			// $mysqli->query("UPDATE wp_blogs SET domain = '{$originalDomain}.{$primaryDomain}' WHERE blog_id = {$blog[0]}");
 			print_r($originalDomain.'.'.$primaryDomain);
 		} else {
