@@ -1,6 +1,5 @@
 <?php
 
-## WON'T WORK WITH SUBLEVEL ENVIRONMENT HIERACHY
 use Platformsh\ConfigReader\Config;
 
 require __DIR__.'/vendor/autoload.php';
@@ -32,6 +31,15 @@ try {
 	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
 	$site = $blogsQuery->fetch_assoc();
 	$originalDomain = $site['domain'];
+	echo $originalDomain;
+
+
+	// # differnt logic depends if custom domain is set
+	// if (condition) {
+	// 	# base domain is a platform.sh domain
+	// } else {
+	// 	# custom domain
+	// }
 
 	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
