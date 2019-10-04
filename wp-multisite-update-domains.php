@@ -30,8 +30,8 @@ try {
 	$blogs = $blogsQuery->fetch_all();
 
 	$siteQuery = $mysqli->query("SELECT domain FROM wp_site");
-	$site = $blogsQuery->fetch_all();
-	$originalDomain = $site[0];
+	$site = $blogsQuery->fetch_assoc();
+	$originalDomain = $site['domain'];
 
 	# update all domains based on the primary/base domain we have on the current environment
 	foreach ($blogs as $blog) {
